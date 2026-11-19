@@ -4,95 +4,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fresh Bites | Menu</title>
+    <title>Fresh Bites | Our Menu</title>
     <link rel="stylesheet" href="style.css">
     <script src="cart.js" defer></script>
 </head>
 <body>
 
-<header>
-    <h1>FRESH BITES</h1>
-    <p>Choose your favourite meals!</p>
+<header class="main-header">
+    <a href="index.html" class="logo">FRESH<span>BITES.</span></a>
+    <p>GOOD FOOD, MADE WITH LOVE</p>
 </header>
 
-<nav>
+<nav class="navbar">
     <a href="index.html">HOME</a>
-    <a href="menu.html">MENU</a>
-    <a href="order.html">ORDER</a>
+    <a class="active" href="menu.html">OUR MENU</a>
+    <a href="order.html">MY ORDER 🛒</a>
 </nav>
 
-<section class="welcome">
-    <h2>Our Food Menu</h2>
-    <p>Freshly prepared meals at affordable prices.</p>
+<section class="page-banner">
+    <p class="eyebrow">MADE FRESH FOR YOU</p>
+    <h1>Our delicious menu</h1>
+    <p>Good food, generous portions and affordable prices.</p>
 </section>
 
-<div class="cart-summary">
-    <h2>🛒 My Cart</h2>
-    <p>Items: <span id="cart-count">0</span></p>
-    <p>Total: P<span id="cart-total">0.00</span></p>
-    <a href="order.html" class="btn">VIEW CART / CHECKOUT</a>
-</div>
+<section class="menu-container">
 
-<section class="food-grid">
-
-    <div class="food-card">
-        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600" alt="Burger">
-        <h3>Homemade Burger</h3>
-        <p>P35.00</p>
-        <button class="btn" onclick="addToCart('Homemade Burger', 35)">
-            Add to Cart
-        </button>
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">TAKE YOUR PICK</p>
+            <h2>Explore our meals</h2>
+        </div>
+        <div class="mini-cart">
+            🛒 <span id="cart-count">0</span> items
+            <br>
+            <strong>P<span id="cart-total">0.00</span></strong>
+        </div>
     </div>
 
-    <div class="food-card">
-        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600" alt="Samosas">
-        <h3>Chicken Samosas</h3>
-        <p>P5.00 each</p>
-        <button class="btn" onclick="addToCart('Chicken Samosa', 5)">
-            Add to Cart
-        </button>
+    <div class="food-grid">
+
+        <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700" alt="Homemade burger">
+            <div class="food-info">
+                <span class="food-category">FAST FOOD</span>
+                <h3>Homemade Burger</h3>
+                <p>A delicious homemade burger.</p>
+                <div class="food-bottom">
+                    <strong>P35.00</strong>
+                    <button class="add-btn" onclick="addToCart('Homemade Burger',35)">+ ADD</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=700" alt="Samosas">
+            <div class="food-info">
+                <span class="food-category">SNACKS</span>
+                <h3>Chicken Samosas</h3>
+                <p>Golden, crispy chicken samosas.</p>
+                <div class="food-bottom">
+                    <strong>P5.00 each</strong>
+                    <button class="add-btn" onclick="addToCart('Chicken Samosa',5)">+ ADD</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=700" alt="Chicken wrap">
+            <div class="food-info">
+                <span class="food-category">FAST FOOD</span>
+                <h3>Chicken Wrap</h3>
+                <p>Fresh and filling chicken wrap.</p>
+                <div class="food-bottom">
+                    <strong>P25.00</strong>
+                    <button class="add-btn" onclick="addToCart('Chicken Wrap',25)">+ ADD</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=700" alt="Hotdog">
+            <div class="food-info">
+                <span class="food-category">FAST FOOD</span>
+                <h3>Hotdog</h3>
+                <p>A tasty hotdog made fresh.</p>
+                <div class="food-bottom">
+                    <strong>P25.00</strong>
+                    <button class="add-btn" onclick="addToCart('Hotdog',25)">+ ADD</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=700" alt="Rice meal">
+            <div class="food-info">
+                <span class="food-category">LUNCH & DINNER</span>
+                <h3>Chicken Rice Meal</h3>
+                <p>Rice served with delicious chicken.</p>
+                <div class="food-bottom">
+                    <strong>P40.00</strong>
+                    <button class="add-btn" onclick="addToCart('Chicken Rice Meal',40)">+ ADD</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=700" alt="Spaghetti">
+            <div class="food-info">
+                <span class="food-category">LUNCH & DINNER</span>
+                <h3>Spaghetti</h3>
+                <p>Comforting pasta dishes.</p>
+                <div class="food-bottom">
+                    <strong>P35.00</strong>
+                    <button class="add-btn" onclick="addToCart('Spaghetti',35)">+ ADD</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=700" alt="Macaroni">
+            <div class="food-info">
+                <span class="food-category">LUNCH & DINNER</span>
+                <h3>Macaroni</h3>
+                <p>A satisfying macaroni meal.</p>
+                <div class="food-bottom">
+                    <strong>P35.00</strong>
+                    <button class="add-btn" onclick="addToCart('Macaroni',35)">+ ADD</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=700" alt="Dumplings">
+            <div class="food-info">
+                <span class="food-category">LUNCH & DINNER</span>
+                <h3>Dumplings</h3>
+                <p>Served with chicken or mince.</p>
+                <div class="food-bottom">
+                    <strong>P40.00</strong>
+                    <button class="add-btn" onclick="addToCart('Dumplings',40)">+ ADD</button>
+                </div>
+            </div>
+        </article>
+
     </div>
 
-    <div class="food-card">
-        <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600" alt="Wrap">
-        <h3>Chicken Wrap</h3>
-        <p>P25.00</p>
-        <button class="btn" onclick="addToCart('Chicken Wrap', 25)">
-            Add to Cart
-        </button>
-    </div>
-
-    <div class="food-card">
-        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600" alt="Hotdog">
-        <h3>Hotdog</h3>
-        <p>P25.00</p>
-        <button class="btn" onclick="addToCart('Hotdog', 25)">
-            Add to Cart
-        </button>
-    </div>
-
-    <div class="food-card">
-        <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600" alt="Rice meal">
-        <h3>Chicken Rice Meal</h3>
-        <p>P40.00</p>
-        <button class="btn" onclick="addToCart('Chicken Rice Meal', 40)">
-            Add to Cart
-        </button>
-    </div>
-
-    <div class="food-card">
-        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600" alt="Pasta">
-        <h3>Spaghetti</h3>
-        <p>P35.00</p>
-        <button class="btn" onclick="addToCart('Spaghetti', 35)">
-            Add to Cart
-        </button>
+    <div class="menu-checkout">
+        <h2>Ready to order?</h2>
+        <p>Your selected meals are waiting in your cart.</p>
+        <a href="order.html" class="primary-btn">VIEW MY CART →</a>
     </div>
 
 </section>
 
 <footer>
-    <p>© 2026 Fresh Bites</p>
+    <h2>FRESH BITES.</h2>
+    <p>Good food, made with love.</p>
+    <a href="https://wa.me/26778440318">Chat with us on WhatsApp</a>
+    <p class="copyright">© 2026 Fresh Bites.</p>
 </footer>
 
 </body>
