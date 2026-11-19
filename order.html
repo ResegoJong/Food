@@ -10,117 +10,133 @@
 </head>
 <body>
 
-<header>
-    <h1>FRESH BITES</h1>
-    <p>Your order, your way!</p>
+<header class="main-header">
+    <a href="index.html" class="logo">FRESH<span>BITES.</span></a>
+    <p>YOUR DELICIOUS ORDER STARTS HERE</p>
 </header>
 
-<nav>
+<nav class="navbar">
     <a href="index.html">HOME</a>
-    <a href="menu.html">MENU</a>
-    <a href="order.html">ORDER</a>
+    <a href="menu.html">OUR MENU</a>
+    <a class="active" href="order.html">MY ORDER 🛒</a>
 </nav>
 
-<section class="order-section">
+<section class="page-banner">
+    <p class="eyebrow">ALMOST THERE!</p>
+    <h1>Your shopping cart</h1>
+    <p>Review your meals before placing your order.</p>
+</section>
 
-    <h2>🛒 Your Shopping Cart</h2>
+<section class="checkout-layout">
 
-    <div id="cart-items">
-        <p>Your cart is empty.</p>
+    <div class="checkout-card">
+        <h2>Your selected meals</h2>
+
+        <div id="cart-items">
+            <p>Your cart is empty. Visit our menu to add meals.</p>
+        </div>
+
+        <a href="menu.html" class="continue-link">
+            ← Continue shopping
+        </a>
+
+        <div class="total-box">
+            <span>YOUR TOTAL</span>
+            <h2>P<span id="checkout-total">0.00</span></h2>
+        </div>
     </div>
 
-    <div class="total-box">
-        <h2>Grand Total: P<span id="checkout-total">0.00</span></h2>
+    <div class="checkout-card customer-card">
+        <p class="eyebrow">CUSTOMER INFORMATION</p>
+        <h2>Delivery details</h2>
+
+        <form onsubmit="sendOrder(event)">
+
+            <label>Full name</label>
+            <input type="text" id="name"
+                placeholder="Your full name" required>
+
+            <label>Phone number</label>
+            <input type="tel" id="phone"
+                placeholder="Your contact number" required>
+
+            <label>Delivery or collection</label>
+            <select id="delivery" required>
+                <option value="">Choose an option</option>
+                <option value="Delivery">Delivery</option>
+                <option value="Collection">Collection</option>
+            </select>
+
+            <label>Delivery address (if applicable)</label>
+            <input type="text" id="address"
+                placeholder="Enter your address">
+
+            <label>Additional instructions</label>
+            <textarea id="notes"
+                placeholder="Special requests or instructions"></textarea>
+
+            <button type="submit" class="whatsapp-btn">
+                PLACE ORDER ON WHATSAPP →
+            </button>
+
+        </form>
+
+        <p class="secure-note">
+            Your order details will be sent directly to Fresh Bites
+            through WhatsApp.
+        </p>
     </div>
-
-    <hr>
-
-    <h2>Customer Details</h2>
-
-    <form onsubmit="sendOrder(event)">
-
-        <label>Full Name</label>
-        <input type="text" id="name"
-               placeholder="Enter your name" required>
-
-        <label>Your Contact Number</label>
-        <input type="tel" id="phone"
-               placeholder="Enter your phone number" required>
-
-        <label>Delivery Address / Collection</label>
-        <input type="text" id="address"
-               placeholder="Enter delivery address or collection" required>
-
-        <label>Additional Instructions</label>
-        <textarea id="notes"
-                  placeholder="Any special requests?"></textarea>
-
-        <button type="submit" class="btn">
-            CONFIRM ORDER ON WHATSAPP
-        </button>
-
-    </form>
-
-    <a href="https://wa.me/26778440318"
-       class="whatsapp-btn"
-       target="_blank">
-       CHAT WITH US ON WHATSAPP
-    </a>
-
-    <a href="menu.html" class="back-link">
-        ← Continue Shopping
-    </a>
 
 </section>
 
 <footer>
-    <p>© 2026 Fresh Bites</p>
+    <h2>FRESH BITES.</h2>
+    <p>Good food, made with love.</p>
+    <a href="https://wa.me/26778440318">Chat with us on WhatsApp</a>
+    <p class="copyright">© 2026 Fresh Bites.</p>
 </footer>
 
 <script>
-
 function sendOrder(event) {
-
     event.preventDefault();
 
     if (cart.length === 0) {
-        alert("Your cart is empty. Please add meals first.");
+        alert("Please add meals to your cart first.");
         return;
     }
 
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
+    const delivery = document.getElementById("delivery").value;
     const address = document.getElementById("address").value;
     const notes = document.getElementById("notes").value;
 
-    let message = "HELLO FRESH BITES! 🍔\n";
-    message += "I would like to place an order.\n\n";
+    if (delivery === "Delivery" && !address.trim()) {
+        alert("Please enter your delivery address.");
+        return;
+    }
 
-    message += "CUSTOMER DETAILS\n";
-    message += "Name: " + name + "\n";
+    let message = "HELLO FRESH BITES! 🍽️\n\n";
+    message += "NEW ORDER\n\n";
+    message += "Customer: " + name + "\n";
     message += "Phone: " + phone + "\n";
-    message += "Address/Collection: " + address + "\n\n";
-
-    message += "MY ORDER\n";
+    message += "Order type: " + delivery + "\n";
+    message += "Address: " + (address || "Collection") + "\n\n";
+    message += "ORDER DETAILS:\n";
 
     cart.forEach(item => {
-        message += item.name +
-            " x " + item.quantity +
-            " = P" + (item.price * item.quantity).toFixed(2) + "\n";
+        message += item.name + " x " + item.quantity +
+        " = P" + (item.price * item.quantity).toFixed(2) + "\n";
     });
 
-    message += "\nGRAND TOTAL: P" +
-        getCartTotal().toFixed(2);
+    message += "\nGRAND TOTAL: P" + getCartTotal().toFixed(2);
+    message += "\n\nInstructions: " + (notes || "None");
 
-    message += "\n\nAdditional instructions: " + notes;
-
-    const whatsappURL =
-        "https://wa.me/26778440318?text=" +
+    const url = "https://wa.me/26778440318?text=" +
         encodeURIComponent(message);
 
-    window.open(whatsappURL, "_blank");
+    window.open(url, "_blank");
 }
-
 </script>
 
 </body>
