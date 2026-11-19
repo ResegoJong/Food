@@ -1,16 +1,12 @@
 
-// Get saved cart or create an empty cart
 let cart = JSON.parse(localStorage.getItem("freshBitesCart")) || [];
 
-// Save cart
 function saveCart() {
     localStorage.setItem("freshBitesCart", JSON.stringify(cart));
 }
 
-// Add food to cart
 function addToCart(name, price) {
-
-    let item = cart.find(food => food.name === name);
+    let item = cart.find(product => product.name === name);
 
     if (item) {
         item.quantity++;
@@ -28,26 +24,23 @@ function addToCart(name, price) {
     alert(name + " added to your cart!");
 }
 
-// Calculate total number of items
 function getCartCount() {
     return cart.reduce((total, item) => total + item.quantity, 0);
 }
 
-// Calculate total price
 function getCartTotal() {
     return cart.reduce(
-        (total, item) => total + item.price * item.quantity, 0
+        (total, item) => total + item.price * item.quantity,
+        0
     );
 }
 
-// Increase quantity
 function increaseItem(index) {
     cart[index].quantity++;
     saveCart();
     updateCart();
 }
 
-// Decrease quantity
 function decreaseItem(index) {
     cart[index].quantity--;
 
@@ -59,18 +52,18 @@ function decreaseItem(index) {
     updateCart();
 }
 
-// Remove item completely
 function removeItem(index) {
     cart.splice(index, 1);
     saveCart();
     updateCart();
 }
 
-// Update cart display
 function updateCart() {
 
-    let count = document.getElementById("cart-count");
-    let total = document.getElementById("cart-total");
+    const count = document.getElementById("cart-count");
+    const total = document.getElementById("cart-total");
+    const checkoutTotal = document.getElementById("checkout-total");
+    const cartItems = document.getElementById("cart-items");
 
     if (count) {
         count.textContent = getCartCount();
@@ -80,41 +73,37 @@ function updateCart() {
         total.textContent = getCartTotal().toFixed(2);
     }
 
-    let cartItems = document.getElementById("cart-items");
+    if (checkoutTotal) {
+        checkoutTotal.textContent = getCartTotal().toFixed(2);
+    }
 
     if (cartItems) {
 
         if (cart.length === 0) {
-            cartItems.innerHTML = "<p>Your cart is empty.</p>";
-        } else {
-
-            cartItems.innerHTML = cart.map((item, index) => `
-                <div class="cart-item">
-
-                    <div>
-                        <h3>${item.name}</h3>
-                        <p>P${item.price.toFixed(2)} each</p>
-                        <p>Subtotal: P${(item.price * item.quantity).toFixed(2)}</p>
-                    </div>
-
-                    <div class="quantity-controls">
-                        <button onclick="decreaseItem(${index})">−</button>
-                        <span>${item.quantity}</span>
-                        <button onclick="increaseItem(${index})">+</button>
-                        <button onclick="removeItem(${index})">Remove</button>
-                    </div>
-
-                </div>
-            `).join("");
+            cartItems.innerHTML =
+                "<p>Your cart is empty. Visit our menu to add meals.</p>";
+            return;
         }
-    }
 
-    let checkoutTotal = document.getElementById("checkout-total");
+        cartItems.innerHTML = cart.map((item, index) => `
+            <div class="cart-item">
 
-    if (checkoutTotal) {
-        checkoutTotal.textContent = getCartTotal().toFixed(2);
+                <div>
+                    <h3>${item.name}</h3>
+                    <p>Price: P${item.price.toFixed(2)}</p>
+                    <p>Subtotal: P${(item.price * item.quantity).toFixed(2)}</p>
+                </div>
+
+                <div class="quantity-controls">
+                    <button onclick="decreaseItem(${index})">−</button>
+                    <strong>${item.quantity}</strong>
+                    <button onclick="increaseItem(${index})">+</button>
+                    <button onclick="removeItem(${index})">Remove</button>
+                </div>
+
+            </div>
+        `).join("");
     }
 }
 
-// Run when page loads
 document.addEventListener("DOMContentLoaded", updateCart);
